@@ -1,10 +1,11 @@
 import { GlobalStyle } from "./styles/GlobalStyle";
+import { Header } from "./header";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      안녕하세요
+      <Header />
     </>
   );
 }
