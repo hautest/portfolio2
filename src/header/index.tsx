@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-scroll";
 import styled from "styled-components";
+import { flexAlignCenter, flexColumnAlignCenter } from "../styles/common";
 
 export function Header() {
   const [opacity, setOpacity] = useState<number>(0);
@@ -41,14 +42,12 @@ const StyledHeade = styled.div<{ opacity: number }>`
   width: 100%;
   height: 7vh;
   top: 0;
-  display: flex;
+  ${flexAlignCenter}
   justify-content: center;
-  align-items: center;
   gap: 20%;
   @media screen and (max-width: 365px) {
     height: 10vh;
-    flex-direction: column;
-    align-items: center;
+    ${flexColumnAlignCenter}
     gap: 10px;
   }
 `;

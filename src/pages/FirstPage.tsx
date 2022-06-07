@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
 import { Header } from "../Header";
+
+import { flexColumnJustCenterAlignCenter, flexColumn } from "../styles/common";
 
 export function FirstPage() {
   return (
@@ -19,14 +20,10 @@ const StyledFirstPage = styled.div`
   height: 100vh;
   width: 100%;
   gap: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${flexColumnJustCenterAlignCenter}
 `;
 const AnimateTextBox = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${flexColumn}
   gap: 20px;
   width: fit-content;
 `;
