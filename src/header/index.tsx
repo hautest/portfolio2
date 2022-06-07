@@ -1,24 +1,42 @@
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 export function Header() {
+  const [opacity, setOpacity] = useState<number>(0);
+  const ref = useRef(document);
+  const handleScroll = () => {
+    const conversion =
+      0.001 * window.scrollY || document.documentElement.scrollTop;
+    setOpacity(conversion);
+    console.log(opacity);
+  };
+  useEffect(() => {
+    ref.current.addEventListener("scroll", handleScroll);
+  });
   return (
-    <StyledHeader>
+    <StyledHeade opacity={opacity}>
       <div>ABOUT ME</div>
       <div>PROJECT</div>
-    </StyledHeader>
+    </StyledHeade>
   );
 }
 
-const StyledHeader = styled.div`
+const StyledHeade = styled.div<{ opacity: number }>`
+  opacity: ${({ opacity }) => opacity};
+  background-color: ${({ theme }) => theme.colors.black};
   font-size: 25px;
-  margin-top: ${({ theme }) => theme.spacing.lg};
+  position: fixed;
+  width: 100%;
+  height: 7vh;
+  top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20%;
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 365px) {
     height: 10vh;
     flex-direction: column;
     align-items: center;
-    gap: 20%;
+    gap: 10px;
   }
 `;

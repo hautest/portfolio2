@@ -1,11 +1,12 @@
 import { GlobalStyle } from "./styles/GlobalStyle";
-import { Header } from "./header";
+import { FirstPage } from "./pages/FirstPage";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <FirstPage />
+      <div style={{ height: "2000px" }}>asdasd</div>
     </>
   );
 }
