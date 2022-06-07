@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-scroll";
 import styled from "styled-components";
 
 export function Header() {
@@ -13,17 +14,28 @@ export function Header() {
   useEffect(() => {
     ref.current.addEventListener("scroll", handleScroll);
   });
-  return (
-    <StyledHeade opacity={opacity}>
-      <div>ABOUT ME</div>
-      <div>PROJECT</div>
-    </StyledHeade>
-  );
+  if (opacity > 0.6) {
+    return (
+      <StyledHeade opacity={opacity}>
+        <Link to="AboutMe" smooth={true}>
+          ABOUT ME
+        </Link>
+        <div>PROJECT</div>
+      </StyledHeade>
+    );
+  } else {
+    return (
+      <StyledHeade opacity={opacity}>
+        <div>ABOUT ME</div>
+        <div>PROJECT</div>
+      </StyledHeade>
+    );
+  }
 }
 
 const StyledHeade = styled.div<{ opacity: number }>`
   opacity: ${({ opacity }) => opacity};
-  background-color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.night1};
   font-size: 25px;
   position: fixed;
   width: 100%;

@@ -1,12 +1,12 @@
 import { GlobalStyle } from "./styles/GlobalStyle";
-import { FirstPage } from "./pages/FirstPage";
+import { FirstPage, AboutMe } from "./pages";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <FirstPage />
-      <div style={{ height: "2000px" }}>asdasd</div>
+      <AboutMe id="AboutMe" />
     </>
   );
 }

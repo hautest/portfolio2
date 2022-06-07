@@ -4,15 +4,13 @@ import { Header } from "../Header";
 
 export function FirstPage() {
   return (
-    <>
-      <StyledFirstPage>
-        <Img alt="내사진" src="../me.jpeg" />
-        <AnimateTextBox>
-          <AnimateText>프론트엔드 지원자 이승훈입니다</AnimateText>
-        </AnimateTextBox>
-        <Header />
-      </StyledFirstPage>
-    </>
+    <StyledFirstPage>
+      <Img alt="내사진" src="../me.jpeg" />
+      <AnimateTextBox>
+        <AnimateText>프론트엔드 지원자 이승훈입니다</AnimateText>
+      </AnimateTextBox>
+      <Header />
+    </StyledFirstPage>
   );
 }
 const StyledFirstPage = styled.div`
