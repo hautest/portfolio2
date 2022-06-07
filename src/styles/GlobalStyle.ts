@@ -7,7 +7,6 @@ import "./font.css";
 export const GlobalStyle = createGlobalStyle`
 ${reset}
   html * {
-    background-color: ${theme.colors.black};
     color: ${theme.colors.white};
     font-family: "GimhaeGayaB";
 }
