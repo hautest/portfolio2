@@ -1,18 +1,17 @@
 import styled from "styled-components";
-
 import { Header } from "../Header";
+
+import { flexColumnJustCenterAlignCenter, flexColumn } from "../styles/common";
 
 export function FirstPage() {
   return (
-    <>
-      <StyledFirstPage>
-        <Img alt="내사진" src="../me.jpeg" />
-        <AnimateTextBox>
-          <AnimateText>프론트엔드 지원자 이승훈입니다</AnimateText>
-        </AnimateTextBox>
-        <Header />
-      </StyledFirstPage>
-    </>
+    <StyledFirstPage>
+      <Img alt="내사진" src="../me.jpeg" />
+      <AnimateTextBox>
+        <AnimateText>프론트엔드 지원자 이승훈입니다</AnimateText>
+      </AnimateTextBox>
+      <Header />
+    </StyledFirstPage>
   );
 }
 const StyledFirstPage = styled.div`
@@ -21,14 +20,10 @@ const StyledFirstPage = styled.div`
   height: 100vh;
   width: 100%;
   gap: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${flexColumnJustCenterAlignCenter}
 `;
 const AnimateTextBox = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${flexColumn}
   gap: 20px;
   width: fit-content;
 `;
