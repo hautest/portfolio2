@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 
 export const flexColumn = css`
   display: flex;
@@ -26,4 +26,10 @@ export const flexColumnJustCenterAlignCenter = css`
 export const flexAlignCenter = css`
   display: flex;
   align-items: center;
+`;
+
+export const StyledFooterButton = styled.button`
+  color: ${({ theme }) => theme.colors.night1};
+  background-color: ${({ theme }) => theme.colors.gray};
+  border: 0;
 `;
