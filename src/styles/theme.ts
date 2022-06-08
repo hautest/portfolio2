@@ -10,7 +10,7 @@ const colors = {
 
 const spacing = {
   lg: "32px",
-  md: "16px",
+  md: "20px",
   sm: "8px",
 };
 
