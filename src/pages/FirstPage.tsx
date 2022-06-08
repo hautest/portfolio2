@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import { Header } from "../Header";
+import { Frame } from "../Frame";
 
 import { flexColumnJustCenterAlignCenter, flexColumn } from "../styles/common";
 
 export function FirstPage() {
   return (
-    <StyledFirstPage>
+    <StyledFirstPage id="FirstPage">
       <Img alt="내사진" src="../me.jpeg" />
       <AnimateTextBox>
         <AnimateText>프론트엔드 지원자 이승훈입니다</AnimateText>
       </AnimateTextBox>
-      <Header />
+      <Frame />
     </StyledFirstPage>
   );
 }
@@ -38,7 +38,7 @@ const AnimateText = styled.div`
   width: 100%;
   height: fit-content;
   border-right: 3px solid;
-  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate;
+  animation: typing 3.5s steps(22), blink 0.5s step-end infinite alternate;
   overflow: hidden;
   height: 20px;
   @keyframes typing {

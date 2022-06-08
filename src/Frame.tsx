@@ -31,7 +31,9 @@ export function Frame() {
           <Link to="AboutMe" smooth={true}>
             ABOUT ME
           </Link>
-          <div>PROJECT</div>
+          <Link to="Project" smooth={true}>
+            PROJECT
+          </Link>
         </StyledHeade>
         <Link to="FirstPage" smooth={true}>
           <FooterUpButton opacity={opacityValue}>⬆</FooterUpButton>

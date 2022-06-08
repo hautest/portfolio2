@@ -2,7 +2,8 @@ const colors = {
   night1: "#0b1f3f",
   night2: "#76A9FB",
   night3: "#2A7AFA",
-  night4: "#2261C7",
+  gray: "#E7EAED",
+  brown: "#E8BF6B",
   white: "#FFFFFF",
   black: "#171717",
 };

@@ -1,23 +1,20 @@
 import { ReactNode } from "react";
+import styled from "styled-components";
+
 import {
   flexColumn,
   flexAlignCenter,
   flexColumnAlignCenter,
 } from "../styles/common";
-import styled from "styled-components";
-
-interface AboutMeProps {
-  id: string;
-}
 
 interface StyledAboutMeProps {
   children: ReactNode;
   id: string;
 }
 
-export function AboutMe({ id }: AboutMeProps) {
+export function AboutMe() {
   return (
-    <StyledAboutMe id={id}>
+    <StyledAboutMe id="AboutMe">
       <BusinessCard>
         <BusinessCardContent>🧑‍💻 이승훈</BusinessCardContent>
         <BusinessCardContent>🏫 인하공업전문대학(재학)</BusinessCardContent>
@@ -52,8 +49,8 @@ export function AboutMe({ id }: AboutMeProps) {
 }
 
 const StyledAboutMe = styled.div<StyledAboutMeProps>`
-  height: 93vh;
-  background-color: ${({ theme }) => theme.colors.night4};
+  height: 100vh;
+  background-color: ${({ theme }) => theme.colors.gray};
   ${flexAlignCenter}
   justify-content: space-around;
   @media screen and (max-width: 740px) {
@@ -64,7 +61,7 @@ const StyledAboutMe = styled.div<StyledAboutMeProps>`
 `;
 
 const BusinessCard = styled.div`
-  background-color: ${({ theme }) => theme.colors.night2};
+  background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing.md};
   width: 40%;
   height: 40%;
@@ -95,7 +92,7 @@ const IntroduceBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: ${({ theme }) => theme.colors.night2};
+  background-color: ${({ theme }) => theme.colors.white};
   @media screen and (max-width: 740px) {
     width: 80%;
   }
