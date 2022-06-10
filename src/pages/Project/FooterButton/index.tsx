@@ -1,84 +1,99 @@
-import { Dispatch, MouseEvent, useState, useEffect } from "react";
+import { MouseEvent, useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
-import { ArrowLeftButton, ArrowRightButton } from "./ArrowButton";
-import { StyledFooterButton } from "../../../styles/common";
+import { projectNumAtom } from "../../../store/projectNumAtom";
+import { useToggle } from "../../../useToggle";
 import { projectData } from "../projectData";
 
-interface FooterButtonProps {
-  projectNum: number;
-  setProjectNum: Dispatch<React.SetStateAction<number>>;
-}
+export function FooterButton() {
+  const [projectNum, setProjectNum] = useRecoilState(projectNumAtom);
+  const maxPage = projectData.length;
+  const { toggle, toggleOn, setToggle } = useToggle();
+  const [dataArr, setDataArr] = useState<
+    //여기 왜 Pick<FooterButtonProps, "projectData"> 사용하면 안되는지 ?
+    | {
+        title: string;
+        gitHub: string;
+        desc: string;
+        url: string;
+        skill: string;
+        id: number;
+      }[]
+    | []
+  >([]);
 
-export function FooterButton({ projectNum, setProjectNum }: FooterButtonProps) {
-  const maxPage = projectData.length - 1;
-  const [buttonPage, setButtonPage] = useState<number[]>([]);
-  const handlePageChange = (e: MouseEvent<HTMLButtonElement>) => {
-    const target = e.target as HTMLButtonElement;
-    setProjectNum(Number(target.innerText));
-  };
   useEffect(() => {
     if (projectNum === 1) {
-      setButtonPage([
-        projectNum,
-        projectNum + 1,
-        projectNum + 2,
-        projectNum + 3,
-        projectNum + 4,
+      setDataArr([
+        projectData[projectNum - 1],
+        projectData[projectNum],
+        projectData[projectNum + 1],
       ]);
-    } else if (projectNum === 2) {
-      setButtonPage([
-        projectNum - 1,
-        projectNum,
-        projectNum + 1,
-        projectNum + 2,
-        projectNum + 3,
+    } else if (projectNum !== 1 && projectNum !== maxPage) {
+      setDataArr([
+        projectData[projectNum - 2],
+        projectData[projectNum - 1],
+        projectData[projectNum],
       ]);
     } else if (projectNum === maxPage) {
-      setButtonPage([
-        projectNum - 4,
-        projectNum - 3,
-        projectNum - 2,
-        projectNum - 1,
-        maxPage,
-      ]);
-    } else if (projectNum + 1 === maxPage) {
-      setButtonPage([
-        projectNum - 3,
-        projectNum - 2,
-        projectNum - 1,
-        projectNum,
-        projectNum + 1,
-      ]);
-    } else {
-      setButtonPage([
-        projectNum - 2,
-        projectNum - 1,
-        projectNum,
-        projectNum + 1,
-        projectNum + 2,
+      setDataArr([
+        projectData[projectNum - 3],
+        projectData[projectNum - 2],
+        projectData[projectNum - 1],
       ]);
     }
-  }, [projectNum, maxPage]);
+  }, [setDataArr, projectNum, maxPage]);
+  const handlePageChange = (e: MouseEvent<HTMLButtonElement>) => {
+    setToggle(false);
+    const target = e.target as HTMLButtonElement;
+    setProjectNum(Number(target.id));
+  };
+
   return (
     <FooterButtonBox>
-      <ArrowLeftButton projectNum={projectNum} setProjectNum={setProjectNum} />
-      {buttonPage.map((pageValue) => (
-        <div key={pageValue}>
-          <StyledFooterButton onClick={handlePageChange} key={pageValue}>
-            {pageValue}
-          </StyledFooterButton>
-        </div>
-      ))}
-      <ArrowRightButton
-        projectNum={projectNum}
-        setProjectNum={setProjectNum}
-        maxPage={maxPage}
-      />
+      {dataArr &&
+        dataArr.map((dataValue) => {
+          return (
+            <div key={dataValue.id}>
+              <StyledFooterButton
+                presentPage={dataValue.id === projectNum}
+                id={String(dataValue.id)}
+                onClick={handlePageChange}
+                key={dataValue.id}
+              >
+                {dataValue.title}
+              </StyledFooterButton>
+            </div>
+          );
+        })}
+      {toggle ? (
+        <StopImg onClick={toggleOn} alt="일시정지아이콘" src="../../stop.png" />
+      ) : (
+        <RegoImg onClick={toggleOn} alt="다시실행아이콘" src="../../rego.png" />
+      )}
     </FooterButtonBox>
   );
 }
 
 const FooterButtonBox = styled.div`
   display: flex;
+  justify-content: center;
+  gap: 10%;
+`;
+
+const StyledFooterButton = styled.button<{ presentPage: boolean }>`
+  font-size: 15px;
+  border-radius: 10px;
+  color: ${({ theme }) => theme.colors.night1};
+  background-color: ${({ theme, presentPage }) =>
+    presentPage ? theme.colors.night2 : theme.colors.gray};
+  border: 0;
+`;
+
+const StopImg = styled.img`
+  width: 20px;
+`;
+const RegoImg = styled.img`
+  width: 20px;
 `;
