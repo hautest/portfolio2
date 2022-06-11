@@ -7,6 +7,7 @@ export const flexColumn = css`
 
 export const flexColumnJustCenter = css`
   display: flex;
+  flex-direction: column;
   justify-content: center;
 `;
 
@@ -32,4 +33,9 @@ export const StyledFooterButton = styled.button`
   color: ${({ theme }) => theme.colors.night1};
   background-color: ${({ theme }) => theme.colors.gray};
   border: 0;
+`;
+
+export const flexJustCenter = css`
+  display: flex;
+  justify-content: center;
 `;
