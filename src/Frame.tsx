@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { opacity } from "./store/opacity";
+import { scrollAtom } from "./store/scrollAtom";
 import { flexAlignCenter, flexColumnAlignCenter } from "./styles/common";
 
 interface Opacity {
@@ -11,7 +11,7 @@ interface Opacity {
 }
 
 export function Frame() {
-  const [opacityValue, setOpacityValue] = useRecoilState(opacity);
+  const [scrollValue, setScrollValue] = useRecoilState(scrollAtom);
   const ref = useRef(document);
   useEffect(() => {
     window.onbeforeunload = function pushRefresh() {
@@ -21,31 +21,33 @@ export function Frame() {
   const handleScroll = () => {
     const conversion =
       0.0015 * window.scrollY || document.documentElement.scrollTop;
-    setOpacityValue(conversion);
+    setScrollValue(conversion);
   };
   ref.current.addEventListener("scroll", handleScroll);
-  if (opacityValue > 0.6) {
+  if (scrollValue > 0.6) {
     return (
       <>
-        <StyledHeade opacity={opacityValue}>
+        <StyledHeade opacity={scrollValue}>
           <Link to="AboutMe" smooth={true}>
             ABOUT ME
           </Link>
-          <div>PROJECT</div>
+          <Link to="Project" smooth={true}>
+            PROJECT
+          </Link>
         </StyledHeade>
         <Link to="FirstPage" smooth={true}>
-          <FooterUpButton opacity={opacityValue}>⬆</FooterUpButton>
+          <FooterUpButton opacity={scrollValue}>⬆</FooterUpButton>
         </Link>
       </>
     );
   } else {
     return (
       <>
-        <StyledHeade opacity={opacityValue}>
+        <StyledHeade opacity={scrollValue}>
           <div>ABOUT ME</div>
           <div>PROJECT</div>
         </StyledHeade>
-        <FooterUpButton opacity={opacityValue}>⬆</FooterUpButton>
+        <FooterUpButton opacity={scrollValue}>⬆</FooterUpButton>
       </>
     );
   }

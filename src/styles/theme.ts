@@ -1,15 +1,15 @@
 const colors = {
   night1: "#0b1f3f",
-  night2: "#76A9FB",
-  night3: "#2A7AFA",
-  night4: "#2261C7",
+  night2: "#95BADF",
+  gray: "#E7EAED",
+  brown: "#E8BF6B",
   white: "#FFFFFF",
   black: "#171717",
 };
 
 const spacing = {
   lg: "32px",
-  md: "16px",
+  md: "20px",
   sm: "8px",
 };
 
