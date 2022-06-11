@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "animate.css";
 import { Frame } from "../Frame";
 
 import { flexColumnJustCenterAlignCenter, flexColumn } from "../styles/common";
@@ -6,7 +7,11 @@ import { flexColumnJustCenterAlignCenter, flexColumn } from "../styles/common";
 export function FirstPage() {
   return (
     <StyledFirstPage id="FirstPage">
-      <Img alt="내사진" src="../me.jpeg" />
+      <Img
+        alt="내사진"
+        src="../img/me.jpeg"
+        className="animate__animated animate__zoomIn"
+      />
       <AnimateTextBox>
         <AnimateText>프론트엔드 지원자 이승훈입니다</AnimateText>
       </AnimateTextBox>

@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import { useEffect, useRef } from "react";
+import styled, { css } from "styled-components";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 
 import { ProjectContent } from "./ProjectContent";
+import { flexColumnJustCenter, flexJustCenter } from "../../styles/common";
 import { projectData } from "./projectData";
 import { projectNumAtom } from "../../store/projectNumAtom";
 import { useToggle } from "../../useToggle";
@@ -10,27 +11,32 @@ import { FooterButton } from "./FooterButton";
 
 export function Project() {
   const [projectNum, setProjectNum] = useRecoilState<number>(projectNumAtom);
+  const [autoProject, setAutoProject] = useState(true);
   const maxPage = projectData.length;
   const { toggle, setToggle } = useToggle();
   const ref = useRef(null);
+
   useEffect(() => {
     if (!!ref.current) {
       const element = ref.current;
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entrie) => {
-          if (entrie.isIntersecting) {
-            console.log("toggleOn");
-            setToggle(true);
-          }
+      if (autoProject) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entrie) => {
+            if (entrie.isIntersecting) {
+              setAutoProject(false);
+              setToggle(true);
+            }
+          });
         });
-      });
-      observer.observe(element);
+        observer.observe(element);
+        return () => observer.unobserve(element);
+      }
     }
-  }, [setToggle]);
+  }, [setToggle, autoProject]);
 
   useEffect(() => {
     const setTime = setTimeout(() => {
-      if (toggle) {
+      if (!!toggle) {
         if (projectNum === maxPage) {
           setProjectNum(0);
         }
@@ -61,11 +67,11 @@ export function Project() {
       <ContentFooterButtonBox>
         <ProjectContentBox>
           <FrontBackButton onClick={handleBack}>
-            <Img alt="이전으로가는방향이미지" src="../../before.png" />
+            <Img alt="이전으로가는방향이미지" src="../../img/before.png" />
           </FrontBackButton>
           <ProjectContent />
           <FrontBackButton onClick={handleFront}>
-            <Img alt="다음으로가는방향이미지" src="../../next.png" />
+            <Img alt="다음으로가는방향이미지" src="../../img/next.png" />
           </FrontBackButton>
         </ProjectContentBox>
         <FooterButtonBox ref={ref}>
@@ -78,12 +84,12 @@ export function Project() {
 
 const StyledProject = styled.div`
   height: 93vh;
-  background-color: ${({ theme }) => theme.colors.gray};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  ${({ theme: { colors, spacing } }) => css`
+    background-color: ${colors.gray};
+    padding: 0 ${spacing.lg};
+  `}
+  ${flexColumnJustCenter}
   gap: 10%;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
 `;
 
 const Projectext = styled.div`
@@ -91,14 +97,12 @@ const Projectext = styled.div`
   font-size: 50px;
   width: 100%;
   @media screen and (max-width: 740px) {
-    display: flex;
-    justify-content: center;
+    ${flexJustCenter};
   }
 `;
 
 const ProjectContentBox = styled.div`
-  display: flex;
-  justify-content: center;
+  ${flexJustCenter};
 `;
 
 const FooterButtonBox = styled.div`

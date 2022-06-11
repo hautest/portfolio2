@@ -2,9 +2,10 @@ import { MouseEvent, useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
-import { projectNumAtom } from "../../../store/projectNumAtom";
-import { useToggle } from "../../../useToggle";
-import { projectData } from "../projectData";
+import { projectNumAtom } from "../../store/projectNumAtom";
+import { useToggle } from "../../useToggle";
+import { flexJustCenter } from "../../styles/common";
+import { projectData } from "./projectData";
 
 export function FooterButton() {
   const [projectNum, setProjectNum] = useRecoilState(projectNumAtom);
@@ -68,9 +69,17 @@ export function FooterButton() {
           );
         })}
       {toggle ? (
-        <StopImg onClick={toggleOn} alt="일시정지아이콘" src="../../stop.png" />
+        <StopImg
+          onClick={toggleOn}
+          alt="일시정지아이콘"
+          src="../../img/stop.png"
+        />
       ) : (
-        <RegoImg onClick={toggleOn} alt="다시실행아이콘" src="../../rego.png" />
+        <RegoImg
+          onClick={toggleOn}
+          alt="다시실행아이콘"
+          src="../../img/rego.png"
+        />
       )}
     </FooterButtonBox>
   );
@@ -78,8 +87,8 @@ export function FooterButton() {
 
 const FooterButtonBox = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 10%;
+  justify-content: space-around;
+  gap: 10px;
 `;
 
 const StyledFooterButton = styled.button<{ presentPage: boolean }>`
@@ -89,6 +98,7 @@ const StyledFooterButton = styled.button<{ presentPage: boolean }>`
   background-color: ${({ theme, presentPage }) =>
     presentPage ? theme.colors.night2 : theme.colors.gray};
   border: 0;
+  word-break: break-all;
 `;
 
 const StopImg = styled.img`
